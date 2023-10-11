@@ -2,6 +2,26 @@ import { Col, Container, Row, Table, Form, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 export default function Product() {
+    const ProductList = [
+        {
+            "id": 1,
+            "name": "apple",
+            "price": "10$",
+            "quantity": "1",
+            "categories": "1",
+            "create-date": "19/8",
+            "status": "Yes"
+        },
+        {
+            "id": 2,
+            "name": "pineapple",
+            "price": "10$",
+            "quantity": "1",
+            "categories": "1",
+            "create-date": "19/8",
+            "status": "no"
+        }
+    ]
     return (
         <Container>
             <Row>
@@ -25,7 +45,7 @@ export default function Product() {
             <Row>
                 <Col sm={4} className="mb-2">
                     <Button>
-                        <Link to={'/AddProduct'} style={{ color: '#FFF', textDecoration:'none' }}>Add new Product</Link>
+                        <Link to={'/AddProduct'} style={{ color: '#FFF', textDecoration: 'none' }}>Add new Product</Link>
                     </Button>
                 </Col>
             </Row>
@@ -34,34 +54,41 @@ export default function Product() {
                     <Table striped bordered hover>
                         <thead>
                             <tr>
-                                <th>#</th>
+                                <th>ID</th>
                                 <th>Product Name</th>
                                 <th>Price</th>
                                 <th>Quantity</th>
                                 <th>Category</th>
-                                <th>Image</th>
+                                <th>Status</th>
                                 <th colSpan={2}>Function</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Product 1</td>
-                                <td>10</td>
-                                <td>100</td>
-                                <td>Category 1</td>
-                                <td>Image</td>
-                                <td>
-                                    <Link to={'/Products/Edit/1'}>Edit</Link>
-                                </td>
-                                <td>
-                                    <Link to={'/Products/Delete/1'}>Delete</Link>
-                                </td>
-                            </tr>
 
+
+                        <tbody>
+                            {
+                                ProductList.map(({ id, name, price, quantity, categories, status }) => (
+                                    <tr>
+                                        <th>{id}</th>
+                                        <td>{name}</td>
+                                        <td>{price}</td>
+                                        <td>{quantity}</td>
+                                        <td>{categories} </td>
+                                        <td>{status}</td>
+                                        <td>
+                                            <Link to={'/Products/Edit'}>Edit</Link>
+                                        </td>
+                                        <td>
+                                            <Link to={'/Products/Delete'}>Delete</Link>
+                                        </td>
+                                    </tr>
+                                ))
+                            }
                         </tbody>
                     </Table>
                 </Col>
+
+
             </Row>
         </Container>
     )
